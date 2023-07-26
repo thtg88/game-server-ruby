@@ -10,17 +10,13 @@ logger = Logger.new($stdout)
 
 server = RandomGameServer.new
 
-# TODO
-# shutdown_channel = RandomGameServer.handle_shutdown_signal do
-#   Concurrent::Channel.go { server.shutdown }
-# end
+shutdown_channel = RandomGameServer.handle_shutdown_signal do
+  Concurrent::Channel.go { server.shutdown }
+end
 
 server.start
-RandomGameClient.spawn(server)
-# TODO
-# Concurrent::Channel.go { RandomGameClient.spawn(server) }
+Concurrent::Channel.go { RandomGameClient.spawn(server) }
 
-# TODO
-# shutdown_channel.take
+shutdown_channel.take
 
 logger.info('[local_simulation] shutting down gracefully')

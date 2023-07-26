@@ -20,22 +20,23 @@ class RandomGameServer
     @logger = Logger.new($stdout)
   end
 
-  # TODO
-  # def self.handle_shutdown_signal(&block)
-  #   shutdown_channel = Concurrent::Channel.new(capacity: 1)
+  def self.handle_shutdown_signal(&block)
+    shutdown_channel = Concurrent::Channel.new(capacity: 1)
 
-  #   Signal.trap('INT') do
-  #     yield block
-  #     shutdown_channel.close
-  #   end
+    # TODO
+    # Signal.trap('INT') do
+    #   yield block
+    #   shutdown_channel.close
+    # end
 
-  #   Signal.trap('TERM') do
-  #     yield block
-  #     shutdown_channel.close
-  #   end
+    # TODO
+    # Signal.trap('TERM') do
+    #   yield block
+    #   shutdown_channel.close
+    # end
 
-  #   shutdown_channel
-  # end
+    shutdown_channel
+  end
 
   def shutdown
     logger.info('[random-game-server] shutting down...')
